@@ -81,6 +81,9 @@ function shellSync(
     }
     return null
   } catch (error) {
+    if (error.stderr !== null) {
+      error.message = `${error.message}\nSTDERR: ${error.stderr.toString()}`
+    }
     throw new ShellError(error.message)
   }
 }
